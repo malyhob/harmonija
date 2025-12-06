@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://cvci7l1at1650"]
+
+[ext_resource type="Script" uid="uid://cu7qchbj7ndoc" path="res://Scripts/Specialized/health_bar.gd" id="1_25q3q"]
+
+[node name="HealthBar" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_25q3q")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = -29.0
+offset_top = -35.0
+offset_right = 28.0
+offset_bottom = 34.0
+theme_override_font_sizes/font_size = 50
+text = "<3"

@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://bkeefxu3f0cji"]
+
+[ext_resource type="Script" uid="uid://bajf7wudjo817" path="res://Scripts/Specialized/player.gd" id="1_kyqiw"]
+[ext_resource type="Texture2D" uid="uid://q18ormntyl2d" path="res://Assets/player.png" id="2_gntrk"]
+[ext_resource type="PackedScene" uid="uid://d11u7ff8llu8l" path="res://Scenes/Components/HealthComponent.tscn" id="3_gntrk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kyqiw"]
+size = Vector2(128, 128)
+
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("HEALTH_COMPONENT")]
+scale = Vector2(0.7, 0.7)
+script = ExtResource("1_kyqiw")
+HEALTH_COMPONENT = NodePath("HealthComponent")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_gntrk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_kyqiw")
+
+[node name="HealthComponent" parent="." instance=ExtResource("3_gntrk")]
+MAX_HEALTH = 4

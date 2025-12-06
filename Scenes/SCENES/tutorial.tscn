@@ -1,0 +1,70 @@
+[gd_scene load_steps=10 format=3 uid="uid://b3rl71vh8t8vm"]
+
+[ext_resource type="PackedScene" uid="uid://bkeefxu3f0cji" path="res://Scenes/Player.tscn" id="1_dgfxh"]
+[ext_resource type="Texture2D" uid="uid://h1p2fanjikp7" path="res://Assets/xrno.png" id="2_dvdq6"]
+[ext_resource type="PackedScene" uid="uid://cvci7l1at1650" path="res://Scenes/Interface/HealthBar.tscn" id="3_w5gnh"]
+[ext_resource type="Texture2D" uid="uid://28wfo6nu5whh" path="res://Assets/Sprites/apolo.png" id="4_05gy2"]
+[ext_resource type="PackedScene" uid="uid://qvjaek1xgglr" path="res://Scenes/Enemies/Tutorial.tscn" id="5_dvdq6"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_b5k31"]
+normal = Vector2(0, 1)
+distance = 203.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_nhs5o"]
+normal = Vector2(1, 0)
+distance = 1.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_clax7"]
+normal = Vector2(-1, 0)
+distance = -959.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_drity"]
+distance = -540.0
+
+[node name="Tutorial" type="Node2D"]
+
+[node name="GameArea" type="CanvasLayer" parent="."]
+
+[node name="Player" parent="GameArea" instance=ExtResource("1_dgfxh")]
+position = Vector2(143, 433)
+SPEED = 600.0
+
+[node name="Boundary" type="StaticBody2D" parent="GameArea"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GameArea/Boundary"]
+shape = SubResource("WorldBoundaryShape2D_b5k31")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="GameArea/Boundary"]
+shape = SubResource("WorldBoundaryShape2D_nhs5o")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="GameArea/Boundary"]
+shape = SubResource("WorldBoundaryShape2D_clax7")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="GameArea/Boundary"]
+shape = SubResource("WorldBoundaryShape2D_drity")
+
+[node name="DisplayArea" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="Background" type="Sprite2D" parent="DisplayArea"]
+z_index = -1
+position = Vector2(480, 99)
+scale = Vector2(1.875, 0.4)
+texture = ExtResource("2_dvdq6")
+
+[node name="HealthBar" parent="DisplayArea" node_paths=PackedStringArray("TRACK") instance=ExtResource("3_w5gnh")]
+z_index = 2
+offset_left = 210.0
+offset_top = 35.0
+offset_right = 210.0
+offset_bottom = 35.0
+TRACK = NodePath("../../GameArea/Player")
+
+[node name="Portrait" type="Sprite2D" parent="DisplayArea"]
+position = Vector2(106, 99)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("4_05gy2")
+
+[node name="TutorialEnemy" parent="DisplayArea" node_paths=PackedStringArray("PLAYER") instance=ExtResource("5_dvdq6")]
+position = Vector2(1, -2)
+PLAYER = NodePath("../../GameArea/Player")

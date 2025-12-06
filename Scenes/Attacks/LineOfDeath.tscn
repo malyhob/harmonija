@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://ci1p2dqo4l7ur"]
+
+[ext_resource type="Script" uid="uid://bogvn63t665c3" path="res://Scripts/Attacks/line_of_death.gd" id="1_dff77"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kcbu1"]
+size = Vector2(960, 50)
+
+[node name="LineOfDeath" type="Area2D"]
+script = ExtResource("1_dff77")
+
+[node name="Line2D" type="Line2D" parent="."]
+points = PackedVector2Array(0, 0, 960, 0)
+width = 50.0
+default_color = Color(0.8352941, 0.05882353, 0, 0.5882353)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(480, 0)
+shape = SubResource("RectangleShape2D_kcbu1")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

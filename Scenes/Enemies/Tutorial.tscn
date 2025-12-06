@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://qvjaek1xgglr"]
+
+[ext_resource type="Script" uid="uid://bdcpmdfqxid36" path="res://Scripts/Enemies/tutorial.gd" id="1_7aqrw"]
+[ext_resource type="Texture2D" uid="uid://bgivs1no6wvuk" path="res://Assets/icon.svg" id="2_6vvcb"]
+[ext_resource type="PackedScene" uid="uid://d11u7ff8llu8l" path="res://Scenes/Components/HealthComponent.tscn" id="3_ria0m"]
+[ext_resource type="FontFile" uid="uid://bfpobrwxb5mhi" path="res://Assets/font.ttf" id="4_6vvcb"]
+
+[node name="TutorialEnemy" type="Node2D" node_paths=PackedStringArray("HEALTH_COMPONENT")]
+script = ExtResource("1_7aqrw")
+HEALTH_COMPONENT = NodePath("HealthComponent")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_6vvcb")
+offset = Vector2(854, 94)
+
+[node name="HealthComponent" parent="." instance=ExtResource("3_ria0m")]
+
+[node name="AttackTimer" type="Timer" parent="."]
+wait_time = 4.5
+one_shot = true
+
+[node name="Label" type="Label" parent="."]
+offset_left = 10.0
+offset_top = 460.0
+offset_right = 756.0
+offset_bottom = 529.0
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_6vvcb")
+theme_override_font_sizes/font_size = 40
+text = "TUTORIAL TUTORIAL TUTORIAL"
+
+[node name="SurviveTimer" type="Timer" parent="."]
+wait_time = 30.0
