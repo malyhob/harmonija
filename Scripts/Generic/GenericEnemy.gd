@@ -14,8 +14,17 @@ func attack():
 	performed+=1
 	attacks.pick_random().call()
 
+func health_changed(new,old):
+	var shader_material = material as ShaderMaterial
+	if new < old:
+		shader_material.set_shader_parameter("enabled",true)
+		await get_tree().create_timer(.5).timeout
+		shader_material.set_shader_parameter("enabled",false)
+
 func StartAttackLoop() -> void:
+	HEALTH_COMPONENT.health_changed.connect(health_changed)
 	while true:
 		attack()
 		$AttackTimer.start()
 		await $AttackTimer.timeout
+		

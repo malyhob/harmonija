@@ -11,9 +11,9 @@ config_version=5
 [application]
 
 config/name="harmonija"
-run/main_scene="uid://dcy4lyfs2awck"
+run/main_scene="uid://c4tpc8xqurpco"
 config/features=PackedStringArray("4.5", "Forward Plus")
-config/icon="res://Assets/icon.svg"
+config/icon="res://Assets/Sprites/icon.svg"
 
 [display]
 

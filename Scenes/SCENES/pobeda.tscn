@@ -1,0 +1,39 @@
+[gd_scene load_steps=5 format=3 uid="uid://c5nqe10qohmoo"]
+
+[ext_resource type="Texture2D" uid="uid://da5ea16anw1c8" path="res://Assets/Background/endscreen.png" id="1_okqfy"]
+[ext_resource type="Script" uid="uid://dyvvd0ktme5h2" path="res://Scripts/Specialized/pobeda.gd" id="1_pfa35"]
+[ext_resource type="FontFile" uid="uid://dm3v5hmkb2rmr" path="res://Assets/logo.ttf" id="3_6xtui"]
+[ext_resource type="AudioStream" uid="uid://ittp3o42j0t5" path="res://Assets/Sound/yipee.mp3" id="4_y0ypq"]
+
+[node name="Pobeda" type="Control"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_pfa35")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-10.104167, 0)
+scale = Vector2(1.0104166, 1.0129629)
+texture = ExtResource("1_okqfy")
+offset = Vector2(490, 270)
+
+[node name="Button" type="Button" parent="."]
+z_index = 2
+layout_mode = 0
+offset_left = 29.0
+offset_top = 487.0
+offset_right = 195.0
+offset_bottom = 521.0
+theme_override_fonts/font = ExtResource("3_6xtui")
+theme_override_font_sizes/font_size = 22
+text = "MENI"
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_y0ypq")
+volume_db = 3.0
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

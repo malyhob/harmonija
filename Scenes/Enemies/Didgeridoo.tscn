@@ -1,0 +1,56 @@
+[gd_scene load_steps=9 format=3 uid="uid://b8av7w1rhj4vt"]
+
+[ext_resource type="Shader" uid="uid://ba7isgkoaifjq" path="res://Scripts/Shaders/sprite_hurt.gdshader" id="1_m38u7"]
+[ext_resource type="Script" uid="uid://ct8eqr5myxmkx" path="res://Scripts/Enemies/didgeridoo.gd" id="2_m38u7"]
+[ext_resource type="PackedScene" uid="uid://d11u7ff8llu8l" path="res://Scenes/Components/HealthComponent.tscn" id="3_xtc8m"]
+[ext_resource type="PackedScene" uid="uid://mkgqxwmpy7jt" path="res://Scenes/Interface/Dialog.tscn" id="4_8tugh"]
+[ext_resource type="Texture2D" uid="uid://bvvaa5w4tuj3e" path="res://Assets/Characters/didgeridoo.png" id="5_m38u7"]
+[ext_resource type="PackedScene" uid="uid://cvci7l1at1650" path="res://Scenes/Interface/HealthBar.tscn" id="6_2ulf1"]
+[ext_resource type="AudioStream" uid="uid://cqllxrq7e1qxw" path="res://Assets/Sound/didg.mp3" id="7_m38u7"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_by7ti"]
+shader = ExtResource("1_m38u7")
+shader_parameter/shock_color = Color(1, 0, 0, 1)
+shader_parameter/amplitude = 30.0
+shader_parameter/frequecy = 10.0
+shader_parameter/enabled = false
+
+[node name="Didgeridoo" type="Node2D" node_paths=PackedStringArray("HEALTH_COMPONENT")]
+material = SubResource("ShaderMaterial_by7ti")
+script = ExtResource("2_m38u7")
+HEALTH_COMPONENT = NodePath("HealthComponent")
+
+[node name="HealthComponent" parent="." instance=ExtResource("3_xtc8m")]
+MAX_HEALTH = 2
+
+[node name="AttackTimer" type="Timer" parent="."]
+wait_time = 4.5
+one_shot = true
+
+[node name="SurviveTimer" type="Timer" parent="."]
+wait_time = 2.5
+
+[node name="Dialog" parent="." instance=ExtResource("4_8tugh")]
+offset_left = 535.0
+offset_top = 10.0
+offset_right = 815.0
+offset_bottom = 132.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+use_parent_material = true
+position = Vector2(530, 53)
+scale = Vector2(0.41, 0.41)
+texture = ExtResource("5_m38u7")
+offset = Vector2(854, 94)
+
+[node name="HealthBar" parent="." node_paths=PackedStringArray("TRACK") instance=ExtResource("6_2ulf1")]
+offset_left = 600.0
+offset_top = 170.0
+offset_right = 600.0
+offset_bottom = 170.0
+TRACK = NodePath("..")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_m38u7")
+volume_db = 1.5
+autoplay = true

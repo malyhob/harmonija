@@ -1,0 +1,79 @@
+[gd_scene load_steps=9 format=3 uid="uid://dohu7tr5tsm8d"]
+
+[ext_resource type="Script" uid="uid://iqxmwsc0n5y0" path="res://Scripts/Attacks/chain_letter.gd" id="1_xe00u"]
+[ext_resource type="FontFile" uid="uid://bdffj82rrmd3a" path="res://Assets/papyrus.TTF" id="2_5noi6"]
+[ext_resource type="Shader" uid="uid://dgii2xxmcfrpf" path="res://Scripts/Shaders/text_wave.gdshader" id="2_mlurp"]
+[ext_resource type="AudioStream" uid="uid://bqfl02mnvuwia" path="res://Assets/Sound/click.wav" id="3_mlurp"]
+[ext_resource type="AudioStream" uid="uid://dpboijhpa77vt" path="res://Assets/Sound/chainComplete.wav" id="4_5xi5c"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5xi5c"]
+shader = ExtResource("2_mlurp")
+shader_parameter/jiggle = 5.0
+shader_parameter/speed = 2.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5noi6"]
+bg_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mlurp"]
+bg_color = Color(0.9145227, 0, 0.27410987, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[node name="Chain" type="Node2D"]
+script = ExtResource("1_xe00u")
+LEN = 3
+
+[node name="Label" type="Label" parent="."]
+material = SubResource("ShaderMaterial_5xi5c")
+offset_left = -55.0
+offset_top = -90.0
+offset_right = 58.0
+offset_bottom = 69.0
+theme_override_colors/font_color = Color(1, 0.02745098, 0, 1)
+theme_override_fonts/font = ExtResource("2_5noi6")
+theme_override_font_sizes/font_size = 100
+text = "Q"
+horizontal_alignment = 1
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 4.0
+one_shot = true
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_mlurp")
+volume_db = 2.0
+
+[node name="Complete" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_5xi5c")
+volume_db = 1.0
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+offset_left = -46.0
+offset_top = 54.0
+offset_right = 46.0
+offset_bottom = 63.0
+theme_override_styles/background = SubResource("StyleBoxFlat_5noi6")
+theme_override_styles/fill = SubResource("StyleBoxFlat_mlurp")
+max_value = 5.0
+value = 5.0
+show_percentage = false
+
+[node name="Label2" type="Label" parent="."]
+visible = false
+offset_left = -20.0
+offset_top = 30.0
+offset_right = 20.0
+offset_bottom = 94.0
+theme_override_colors/font_color = Color(1, 0.02745098, 0, 1)
+theme_override_fonts/font = ExtResource("2_5noi6")
+theme_override_font_sizes/font_size = 40
+text = "5"
+horizontal_alignment = 1
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

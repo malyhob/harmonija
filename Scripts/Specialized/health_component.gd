@@ -17,5 +17,8 @@ func damage(amount):
 		return
 	LastHurt = Time.get_unix_time_from_system()*1000
 	var old_health = Health
+	
+	$AudioStreamPlayer2D.pitch_scale = randf_range(0.8,1.2)
+	$AudioStreamPlayer2D.play()
 	Health = clamp(Health-amount,0,MAX_HEALTH)
 	health_changed.emit(Health,old_health)

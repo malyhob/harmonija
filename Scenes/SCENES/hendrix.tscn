@@ -1,0 +1,85 @@
+[gd_scene load_steps=13 format=3 uid="uid://cifmj50m2g2nu"]
+
+[ext_resource type="PackedScene" uid="uid://bkeefxu3f0cji" path="res://Scenes/Player.tscn" id="1_dla6b"]
+[ext_resource type="Texture2D" uid="uid://cuq5t4nyejhv4" path="res://Assets/Background/fight_background.png" id="2_bh7rp"]
+[ext_resource type="Texture2D" uid="uid://cpo1ksxgp424i" path="res://Assets/Background/background.png" id="3_gi2kw"]
+[ext_resource type="PackedScene" uid="uid://cvci7l1at1650" path="res://Scenes/Interface/HealthBar.tscn" id="4_f2sqn"]
+[ext_resource type="Shader" uid="uid://ba7isgkoaifjq" path="res://Scripts/Shaders/sprite_hurt.gdshader" id="5_d7ig5"]
+[ext_resource type="Texture2D" uid="uid://28wfo6nu5whh" path="res://Assets/Characters/apolo.png" id="6_xiwh5"]
+[ext_resource type="PackedScene" uid="uid://5l2sxmuc1snq" path="res://Scenes/Enemies/Hendrix.tscn" id="7_dla6b"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_b5k31"]
+normal = Vector2(0, 1)
+distance = 203.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_nhs5o"]
+normal = Vector2(1, 0)
+distance = 1.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_clax7"]
+normal = Vector2(-1, 0)
+distance = -959.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_drity"]
+distance = -540.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_crmc6"]
+shader = ExtResource("5_d7ig5")
+shader_parameter/shock_color = Color(1, 0, 0, 1)
+shader_parameter/amplitude = 30.0
+shader_parameter/frequecy = 10.0
+shader_parameter/enabled = false
+
+[node name="Hendrix" type="Node2D"]
+
+[node name="GameArea" type="CanvasLayer" parent="."]
+
+[node name="Player" parent="GameArea" node_paths=PackedStringArray("PORTRAIT") instance=ExtResource("1_dla6b")]
+position = Vector2(143, 433)
+SPEED = 600.0
+PORTRAIT = NodePath("../../DisplayArea/Portrait")
+
+[node name="Boundary" type="StaticBody2D" parent="GameArea"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GameArea/Boundary"]
+shape = SubResource("WorldBoundaryShape2D_b5k31")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="GameArea/Boundary"]
+shape = SubResource("WorldBoundaryShape2D_nhs5o")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="GameArea/Boundary"]
+shape = SubResource("WorldBoundaryShape2D_clax7")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="GameArea/Boundary"]
+shape = SubResource("WorldBoundaryShape2D_drity")
+
+[node name="Sprite2D" type="Sprite2D" parent="GameArea"]
+z_index = -1
+position = Vector2(481.80002, 370)
+scale = Vector2(0.9771429, 1)
+texture = ExtResource("2_bh7rp")
+
+[node name="DisplayArea" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="Background" type="Sprite2D" parent="DisplayArea"]
+z_index = -1
+position = Vector2(480, 100)
+texture = ExtResource("3_gi2kw")
+
+[node name="HealthBar" parent="DisplayArea" node_paths=PackedStringArray("TRACK") instance=ExtResource("4_f2sqn")]
+z_index = 2
+offset_left = 210.0
+offset_top = 35.0
+offset_right = 210.0
+offset_bottom = 35.0
+TRACK = NodePath("../../GameArea/Player")
+
+[node name="Portrait" type="Sprite2D" parent="DisplayArea"]
+material = SubResource("ShaderMaterial_crmc6")
+position = Vector2(106, 99)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("6_xiwh5")
+
+[node name="Hendrix" parent="DisplayArea" node_paths=PackedStringArray("PLAYER") instance=ExtResource("7_dla6b")]
+PLAYER = NodePath("../../GameArea/Player")

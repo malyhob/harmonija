@@ -1,18 +1,28 @@
-[gd_scene load_steps=5 format=3 uid="uid://bkeefxu3f0cji"]
+[gd_scene load_steps=7 format=3 uid="uid://bkeefxu3f0cji"]
 
+[ext_resource type="Shader" uid="uid://ba7isgkoaifjq" path="res://Scripts/Shaders/sprite_hurt.gdshader" id="1_dewec"]
 [ext_resource type="Script" uid="uid://bajf7wudjo817" path="res://Scripts/Specialized/player.gd" id="1_kyqiw"]
-[ext_resource type="Texture2D" uid="uid://q18ormntyl2d" path="res://Assets/player.png" id="2_gntrk"]
+[ext_resource type="Texture2D" uid="uid://q18ormntyl2d" path="res://Assets/Sprites/player.png" id="2_gntrk"]
 [ext_resource type="PackedScene" uid="uid://d11u7ff8llu8l" path="res://Scenes/Components/HealthComponent.tscn" id="3_gntrk"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5ixxa"]
+shader = ExtResource("1_dewec")
+shader_parameter/shock_color = Color(1, 0, 0, 1)
+shader_parameter/amplitude = 5.0
+shader_parameter/frequecy = 10.0
+shader_parameter/enabled = false
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kyqiw"]
 size = Vector2(128, 128)
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("HEALTH_COMPONENT")]
+material = SubResource("ShaderMaterial_5ixxa")
 scale = Vector2(0.7, 0.7)
 script = ExtResource("1_kyqiw")
 HEALTH_COMPONENT = NodePath("HealthComponent")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+use_parent_material = true
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("2_gntrk")
 

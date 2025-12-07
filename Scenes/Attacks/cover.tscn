@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=3 uid="uid://dmrb68sylw3s4"]
+
+[ext_resource type="Script" uid="uid://bogvn63t665c3" path="res://Scripts/Attacks/line_of_death.gd" id="1_kg5n3"]
+[ext_resource type="AudioStream" uid="uid://c4x3ene23wj6p" path="res://Assets/Sound/laser.mp3" id="2_ek5hy"]
+[ext_resource type="AudioStream" uid="uid://cg6eijdqway6u" path="res://Assets/Sound/blipSelect.wav" id="3_i8suj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kcbu1"]
+size = Vector2(667, 538)
+
+[node name="LineOfDeath" type="Area2D"]
+script = ExtResource("1_kg5n3")
+
+[node name="Line2D" type="Line2D" parent="."]
+position = Vector2(193, 6)
+scale = Vector2(0.6701597, 1)
+points = PackedVector2Array(0, 0, 4, 541)
+width = 1000.0
+default_color = Color(0.8352941, 0.05882353, 0, 0.5882353)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(196, 272)
+shape = SubResource("RectangleShape2D_kcbu1")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_ek5hy")
+volume_db = 1.0
+
+[node name="Click" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_i8suj")
+volume_db = 2.0
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

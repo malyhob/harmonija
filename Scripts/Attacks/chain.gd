@@ -6,7 +6,7 @@ var completed = 0
 @export var LEN = 6
 @export var PLAYER := CharacterBody2D
 
-const characters = "ZXCVBNER"
+const characters = "ERZXCVB"
 
 func generateChain():
 	for i in LEN:
@@ -16,22 +16,26 @@ func generateChain():
 func _ready() -> void:
 	generateChain()
 	$Label.text = chain[0]
+	$ProgressBar.max_value = $Timer.wait_time
 	$Timer.start()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	if completed < LEN:
-		$Label2.text = str(int($Timer.time_left))
+		$ProgressBar.value = $Timer.time_left
 		if Input.is_key_pressed(OS.find_keycode_from_string(chain[completed])):
+			$AudioStreamPlayer2D.pitch_scale = randf_range(0.8,1.2)
+			$AudioStreamPlayer2D.play()
 			completed+=1
 			if completed < chain.size():
 				$Label.text = chain[completed]
 			else:
+				$Complete.play()
 				$Label.text = ""
-				$Label2.text = ""
+				$ProgressBar.visible = false
 	else:
 		$Label.text = ""
-		$Label2.text = ""
+		$ProgressBar.visible = false
 
 
 func _on_timer_timeout() -> void:

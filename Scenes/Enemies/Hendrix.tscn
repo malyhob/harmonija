@@ -1,0 +1,56 @@
+[gd_scene load_steps=9 format=3 uid="uid://5l2sxmuc1snq"]
+
+[ext_resource type="Shader" uid="uid://ba7isgkoaifjq" path="res://Scripts/Shaders/sprite_hurt.gdshader" id="1_hqgxf"]
+[ext_resource type="Script" uid="uid://bevk4itqta3ea" path="res://Scripts/Enemies/hendrix.gd" id="2_hqgxf"]
+[ext_resource type="PackedScene" uid="uid://d11u7ff8llu8l" path="res://Scenes/Components/HealthComponent.tscn" id="3_aceus"]
+[ext_resource type="PackedScene" uid="uid://mkgqxwmpy7jt" path="res://Scenes/Interface/Dialog.tscn" id="4_e0kla"]
+[ext_resource type="Texture2D" uid="uid://j6mg44dhcyyt" path="res://Assets/Background/hendrix.png" id="5_hqgxf"]
+[ext_resource type="PackedScene" uid="uid://cvci7l1at1650" path="res://Scenes/Interface/HealthBar.tscn" id="6_6gyjl"]
+[ext_resource type="AudioStream" uid="uid://mf302c60furf" path="res://Assets/Sound/electric.mp3" id="7_hqgxf"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_by7ti"]
+shader = ExtResource("1_hqgxf")
+shader_parameter/shock_color = Color(1, 0, 0, 1)
+shader_parameter/amplitude = 30.0
+shader_parameter/frequecy = 10.0
+shader_parameter/enabled = false
+
+[node name="Hendrix" type="Node2D" node_paths=PackedStringArray("HEALTH_COMPONENT")]
+material = SubResource("ShaderMaterial_by7ti")
+script = ExtResource("2_hqgxf")
+HEALTH_COMPONENT = NodePath("HealthComponent")
+
+[node name="HealthComponent" parent="." instance=ExtResource("3_aceus")]
+MAX_HEALTH = 3
+
+[node name="AttackTimer" type="Timer" parent="."]
+wait_time = 4.5
+one_shot = true
+
+[node name="SurviveTimer" type="Timer" parent="."]
+wait_time = 2.5
+
+[node name="Dialog" parent="." instance=ExtResource("4_e0kla")]
+offset_left = 280.0
+offset_top = 68.0
+offset_right = 560.0
+offset_bottom = 190.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+use_parent_material = true
+position = Vector2(530, 53)
+scale = Vector2(0.41, 0.41)
+texture = ExtResource("5_hqgxf")
+offset = Vector2(940, 94)
+
+[node name="HealthBar" parent="." node_paths=PackedStringArray("TRACK") instance=ExtResource("6_6gyjl")]
+offset_left = 550.0
+offset_top = 170.0
+offset_right = 550.0
+offset_bottom = 170.0
+TRACK = NodePath("..")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_hqgxf")
+volume_db = 1.5
+autoplay = true

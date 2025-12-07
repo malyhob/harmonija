@@ -6,7 +6,7 @@ const HEART_SCENE = preload("res://Scenes/Components/Heart.tscn")
 var hearts = []
 
 func calculate_distance():
-	var dist = 80
+	var dist = 0
 	for heart:Sprite2D in hearts:
 		dist+=heart.global_scale.x + 80
 	return dist

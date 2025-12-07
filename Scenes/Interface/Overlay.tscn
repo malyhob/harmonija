@@ -1,0 +1,47 @@
+[gd_scene load_steps=4 format=3 uid="uid://v5lghm37x1ob"]
+
+[ext_resource type="Script" uid="uid://bcetmgl16nd1l" path="res://Scripts/Specialized/overlay.gd" id="1_mdp6l"]
+[ext_resource type="Texture2D" uid="uid://h1p2fanjikp7" path="res://Assets/Sprites/xrno.png" id="2_wv1g2"]
+[ext_resource type="FontFile" uid="uid://bdffj82rrmd3a" path="res://Assets/papyrus.TTF" id="3_dm41u"]
+
+[node name="Overlay" type="Control"]
+z_index = 2
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_mdp6l")
+
+[node name="Background" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(479.99997, 270)
+scale = Vector2(1.875, 1.0546875)
+texture = ExtResource("2_wv1g2")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 117.0
+offset_top = 283.0
+offset_right = 826.0
+offset_bottom = 425.0
+theme_override_fonts/font = ExtResource("3_dm41u")
+theme_override_font_sizes/font_size = 90
+text = "GAME OVER"
+
+[node name="TimeText" type="Label" parent="."]
+layout_mode = 0
+offset_left = 2.0
+offset_top = -4.0
+offset_right = 133.0
+offset_bottom = 138.0
+theme_override_fonts/font = ExtResource("3_dm41u")
+theme_override_font_sizes/font_size = 90
+text = "5"
+horizontal_alignment = 1
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 4.0
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

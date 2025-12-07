@@ -1,9 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://b3rl71vh8t8vm"]
+[gd_scene load_steps=13 format=3 uid="uid://b3rl71vh8t8vm"]
 
 [ext_resource type="PackedScene" uid="uid://bkeefxu3f0cji" path="res://Scenes/Player.tscn" id="1_dgfxh"]
-[ext_resource type="Texture2D" uid="uid://h1p2fanjikp7" path="res://Assets/xrno.png" id="2_dvdq6"]
+[ext_resource type="Texture2D" uid="uid://cpo1ksxgp424i" path="res://Assets/Background/background.png" id="2_dvdq6"]
+[ext_resource type="Texture2D" uid="uid://cuq5t4nyejhv4" path="res://Assets/Background/fight_background.png" id="2_w5gnh"]
 [ext_resource type="PackedScene" uid="uid://cvci7l1at1650" path="res://Scenes/Interface/HealthBar.tscn" id="3_w5gnh"]
-[ext_resource type="Texture2D" uid="uid://28wfo6nu5whh" path="res://Assets/Sprites/apolo.png" id="4_05gy2"]
+[ext_resource type="Texture2D" uid="uid://28wfo6nu5whh" path="res://Assets/Characters/apolo.png" id="4_05gy2"]
+[ext_resource type="Shader" uid="uid://ba7isgkoaifjq" path="res://Scripts/Shaders/sprite_hurt.gdshader" id="5_05gy2"]
 [ext_resource type="PackedScene" uid="uid://qvjaek1xgglr" path="res://Scenes/Enemies/Tutorial.tscn" id="5_dvdq6"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_b5k31"]
@@ -21,13 +23,21 @@ distance = -959.0
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_drity"]
 distance = -540.0
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_b5k31"]
+shader = ExtResource("5_05gy2")
+shader_parameter/shock_color = Color(1, 0, 0, 1)
+shader_parameter/amplitude = 30.0
+shader_parameter/frequecy = 10.0
+shader_parameter/enabled = false
+
 [node name="Tutorial" type="Node2D"]
 
 [node name="GameArea" type="CanvasLayer" parent="."]
 
-[node name="Player" parent="GameArea" instance=ExtResource("1_dgfxh")]
+[node name="Player" parent="GameArea" node_paths=PackedStringArray("PORTRAIT") instance=ExtResource("1_dgfxh")]
 position = Vector2(143, 433)
 SPEED = 600.0
+PORTRAIT = NodePath("../../DisplayArea/Portrait")
 
 [node name="Boundary" type="StaticBody2D" parent="GameArea"]
 
@@ -43,13 +53,18 @@ shape = SubResource("WorldBoundaryShape2D_clax7")
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="GameArea/Boundary"]
 shape = SubResource("WorldBoundaryShape2D_drity")
 
+[node name="Sprite2D" type="Sprite2D" parent="GameArea"]
+z_index = -1
+position = Vector2(481.80002, 370)
+scale = Vector2(0.9771429, 1)
+texture = ExtResource("2_w5gnh")
+
 [node name="DisplayArea" type="CanvasLayer" parent="."]
 layer = 2
 
 [node name="Background" type="Sprite2D" parent="DisplayArea"]
 z_index = -1
-position = Vector2(480, 99)
-scale = Vector2(1.875, 0.4)
+position = Vector2(480, 100)
 texture = ExtResource("2_dvdq6")
 
 [node name="HealthBar" parent="DisplayArea" node_paths=PackedStringArray("TRACK") instance=ExtResource("3_w5gnh")]
@@ -61,6 +76,7 @@ offset_bottom = 35.0
 TRACK = NodePath("../../GameArea/Player")
 
 [node name="Portrait" type="Sprite2D" parent="DisplayArea"]
+material = SubResource("ShaderMaterial_b5k31")
 position = Vector2(106, 99)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("4_05gy2")

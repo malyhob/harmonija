@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://ci1p2dqo4l7ur"]
+[gd_scene load_steps=5 format=3 uid="uid://ci1p2dqo4l7ur"]
 
 [ext_resource type="Script" uid="uid://bogvn63t665c3" path="res://Scripts/Attacks/line_of_death.gd" id="1_dff77"]
+[ext_resource type="AudioStream" uid="uid://c4x3ene23wj6p" path="res://Assets/Sound/laser.mp3" id="2_kcbu1"]
+[ext_resource type="AudioStream" uid="uid://cg6eijdqway6u" path="res://Assets/Sound/blipSelect.wav" id="3_sudlv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kcbu1"]
 size = Vector2(960, 50)
@@ -20,6 +22,14 @@ shape = SubResource("RectangleShape2D_kcbu1")
 [node name="Timer" type="Timer" parent="."]
 wait_time = 5.0
 one_shot = true
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_kcbu1")
+volume_db = 1.0
+
+[node name="Click" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_sudlv")
+volume_db = 2.0
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]
