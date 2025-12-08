@@ -54,7 +54,7 @@ func StartAttackLoop() -> void:
 	while true:
 		$Dialog.dialog(str(performed),"Pobedi da udjes u Agartu")
 		attack()
-		$AttackTimer.start(2)
+		$AttackTimer.start(1)
 		await $AttackTimer.timeout
 
 func _ready():

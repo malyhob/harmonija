@@ -82,7 +82,7 @@ func StartAttackLoop() -> void:
 	get_parent().get_parent().get_child(1).add_child(overlay)
 	
 	await overlay.finish
-	get_tree().change_scene_to_file("res://Scenes/SCENES/didgeridoo.tscn")
+	get_tree().change_scene_to_file("res://Scenes/SCENES/hendrix.tscn")
 
 func _ready():
 	StartAttackLoop()
