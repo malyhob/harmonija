@@ -77,7 +77,7 @@ func StartAttackLoop() -> void:
 	$HealthComponent.damage(1)
 	$AudioStreamPlayer2D.stop()
 	var overlay = OVERLAY.instantiate()
-	overlay.TEXT = "Putuješ još jednom..."
+	overlay.TEXT = "Travelling..."
 	overlay.TIME = 3
 	get_parent().get_parent().get_child(1).add_child(overlay)
 	

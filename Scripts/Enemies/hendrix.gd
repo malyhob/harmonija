@@ -61,7 +61,7 @@ func napad1():
 	get_tree().current_scene.get_child(0).add_child.call_deferred(a)
 	
 func StartAttackLoop() -> void:
-	$Dialog.dialog("Hendrix","Srećno :3")
+	$Dialog.dialog("Hendrix","Good luck :3")
 	$AttackTimer.start(3)
 	await $AttackTimer.timeout
 	while performed < 5:
