@@ -34,7 +34,11 @@ func health_changed(new,old):
 		
 		await overlay.finish
 		get_tree().call_deferred("reload_current_scene")
-		
+
+func _input(event):
+	if event.is_action_pressed("Quit"):
+		get_tree().quit()
+	
 func handle_movement() -> void:
 	# magija
 	var dir = Input.get_vector(LEFT_ACTION,RIGHT_ACTION,UP_ACTION,DOWN_ACTION)

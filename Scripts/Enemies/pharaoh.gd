@@ -50,9 +50,9 @@ func napad4():
 	get_tree().current_scene.get_child(0).add_child.call_deferred(a)
 	
 func StartAttackLoop() -> void:
-	$Dialog.dialog("","Survive to enter Agartha")
+	$Dialog.dialog("",tr("ENDLESS_TEXT"))
 	while true:
-		$Dialog.dialog(str(performed),"Survive to enter Agartha")
+		$Dialog.dialog(str(performed),tr("ENDLESS_TEXT"))
 		attack()
 		$AttackTimer.start(1)
 		await $AttackTimer.timeout

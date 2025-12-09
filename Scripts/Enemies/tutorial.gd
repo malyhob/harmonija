@@ -25,29 +25,29 @@ func napad3():
 	get_tree().current_scene.get_child(0).add_child.call_deferred(a)
 	
 func StartAttackLoop() -> void:
-	$Dialog.dialog("TUTORIAL","↑↓←→ / WASD to move")
+	$Dialog.dialog("TUTORIAL",tr("TUT1"))
 	$AttackTimer.start()
 	await $AttackTimer.timeout
-	$Dialog.dialog("TUTORIAL","Lasers warn you of their location before firing")
+	$Dialog.dialog("TUTORIAL",tr("TUT2"))
 	napad1()
 	$AttackTimer.start()
 	await $AttackTimer.timeout
-	$Dialog.dialog("TUTORIAL","They can also be vertical")
+	$Dialog.dialog("TUTORIAL",tr("TUT3"))
 	napad2()
 	$AttackTimer.start()
 	await $AttackTimer.timeout
-	$Dialog.dialog("TUTORIAL","Quickly press the red letters on your keyboard")
+	$Dialog.dialog("TUTORIAL",tr("TUT4"))
 	napad3()
 	$AttackTimer.start()
 	await $AttackTimer.timeout
 	while performed < 20:
-		$Dialog.dialog("TUTORIAL","Survive: "+str(20-performed))
+		$Dialog.dialog("TUTORIAL",tr("TUT5")+str(20-performed))
 		attack()
 		$AttackTimer.start(4-clamp(performed/3.0,0.1,3))
 		await $AttackTimer.timeout
 	$AudioStreamPlayer2D.stop()
 	var overlay = OVERLAY.instantiate()
-	overlay.TEXT = "Travelling..."
+	overlay.TEXT = tr("TRAVEL")
 	overlay.TIME = 3
 	get_parent().get_parent().get_child(1).add_child(overlay)
 	

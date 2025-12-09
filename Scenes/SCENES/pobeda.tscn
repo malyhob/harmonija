@@ -30,7 +30,7 @@ offset_right = 195.0
 offset_bottom = 521.0
 theme_override_fonts/font = ExtResource("3_6xtui")
 theme_override_font_sizes/font_size = 22
-text = "MENI"
+text = "MENU"
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_y0ypq")

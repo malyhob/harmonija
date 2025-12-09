@@ -36,7 +36,7 @@ one_shot = true
 wait_time = 30.0
 
 [node name="Dialog" parent="." instance=ExtResource("4_6vvcb")]
-offset_left = 278.0
+offset_left = 213.0
 offset_top = 64.0
 offset_right = 674.0
 offset_bottom = 188.0
